@@ -1,0 +1,23 @@
+@import "../../assets/styles/global.module.scss";
+@import '../../assets/styles/mixins';
+
+.background {
+  margin: 5% auto;
+  max-width: 70%;
+  min-height: 250px;
+  background: white;
+  border-radius: 25px;
+  padding: 20px;
+}
+.todoTitle {
+  @include fonts('Poppins', 35px, #1363DF, 700);
+}
+.textFieldAndBtnCreate {
+  margin-top: 20px;
+  display: flex;
+  justify-items: center;
+  align-items: center;
+}
+.btnCreateNewTask {
+  margin-left: 20px;
+}

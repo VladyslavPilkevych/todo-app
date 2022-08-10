@@ -1,0 +1,25 @@
+$default-fonts: 'Helvetica', 'Roboto', sans-serif;
+$fonts: 'Poppins', sans-serif, $default-fonts;
+
+$blue: #0156ff;
+$black: #020202;
+$white: #ffffff;
+$grey-text: #acacac;
+$grey-star: #cacdd8;
+$orange-star: #e9a426;
+$placeholder: #78a962;
+$bg-white-color: #f5f7ff;
+$dark-grey-text: #a2a6b0;
+$placeholder-red: #c94d3f;
+$grey: #666666;
+$orange: #FFB800;
+$shadow-1: 0px 5px 15px rgba(0, 0, 0, 0.14);
+$shadow-2: 0px 4px 200px rgba(0, 0, 0, 0.18);
+$shadow-3: 0px 1px 4px rgba(0, 0, 0, 0.17);
+$shadow-4: 0px 1px 4px rgba(0, 0, 0, 0.17);
+
+:export {
+  blue: $blue;
+  black: $black;
+  white: $white;  
+}
