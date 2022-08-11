@@ -1,5 +1,8 @@
+@import 'scss-reset/_reset.scss';
+
 html {
   background-color: rgb(180, 180, 180);
-  // align-items: center;
-  // justify-content: center;
+}
+body {
+  padding: 5%;
 }

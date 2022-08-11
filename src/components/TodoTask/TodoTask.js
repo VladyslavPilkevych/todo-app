@@ -6,6 +6,7 @@ import ListItemText from '@mui/material/ListItemText';
 import Checkbox from '@mui/material/Checkbox';
 import IconButton from '@mui/material/IconButton';
 // import EditIcon from '@mui/icons-material/Edit';
+// import MenuIcon from '@mui/icons-material/Menu';
 import DeleteIcon from '@mui/icons-material/Delete';
 import PropTypes from 'prop-types';
 import db from '../../db/db';
@@ -14,35 +15,8 @@ import styles from './TodoTask.module.scss';
 function TodoTask(props) {
   const { value, labelId } = props;
   const { todos } = db;
-  // const [checked, setChecked] = useState([0]);
   const [checked, setChecked] = useState(value.complete);
-  // const handleToggle = (valueNew) => () => {
-  //   const currentIndex = checked.indexOf(valueNew);
-  //   const newChecked = [...checked];
-
-  //   if (currentIndex === -1) {
-  //     newChecked.push(valueNew);
-  //   } else {
-  //     newChecked.splice(currentIndex, 1);
-  //   }
-  //   console.log(newChecked);
-  //   setChecked(newChecked);
-  // };
-  // if (value.complete) {
-  //   handleToggle();
-  // }
   const updateTaskComplete = async (id) => {
-    // const currentIndex = checked.indexOf(id);
-    // const newChecked = [...checked];
-
-    // if (currentIndex === -1) {
-    //   newChecked.push(id);
-    // } else {
-    //   newChecked.splice(currentIndex, 1);
-    // }
-    // console.log(newChecked);
-    // setChecked(newChecked);
-    // await todos.update(id, { complete: !!newChecked[1] });
     await todos.update(id, { complete: !checked });
     setChecked((e) => !e);
   };
@@ -60,6 +34,9 @@ function TodoTask(props) {
             {/* <IconButton edge="end" aria-label="comments">
               <EditIcon />
             </IconButton> */}
+            {/* <IconButton edge="end" aria-label="comments">
+              <MenuIcon />
+            </IconButton> */}
             <IconButton
               sx={{
                 marginLeft: 2,
@@ -74,7 +51,6 @@ function TodoTask(props) {
         }
         disablePadding
       >
-        {/* <ListItemButton role={undefined} onClick={handleToggle(value.id)} dense> */}
         <ListItemButton
           role={undefined}
           onClick={() => updateTaskComplete(value.id)}
@@ -83,7 +59,6 @@ function TodoTask(props) {
           <ListItemIcon>
             <Checkbox
               edge="start"
-              // checked={checked.indexOf(value.id) !== -1}
               checked={value.complete}
               tabIndex={-1}
               disableRipple
@@ -96,7 +71,6 @@ function TodoTask(props) {
               value.complete && styles.taskTextChecked
             }`}
             primary={value.task}
-            // primary={`Line item ${value}`}
           />
         </ListItemButton>
       </ListItem>

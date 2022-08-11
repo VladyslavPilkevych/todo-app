@@ -2,7 +2,8 @@
 @import '../../assets/styles/mixins';
 
 .background {
-  margin: 5% auto;
+  // margin: 5% auto;
+  margin: 0 auto;
   max-width: 70%;
   min-height: 250px;
   background: white;
@@ -20,4 +21,8 @@
 }
 .btnCreateNewTask {
   margin-left: 20px;
+}
+.noTasks {
+  @include fonts('Poppins', 20px, black, 400);
+  margin: 20px 0 0 29%;
 }

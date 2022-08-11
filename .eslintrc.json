@@ -27,6 +27,7 @@
         "react/jsx-filename-extension": "off",
         "react/react-in-jsx-scope": "off",
         "react/jsx-wrap-multilines": "off",
-        "linebreak-style": "off"
+        "linebreak-style": "off",
+        "operator-linebreak": "off"
     }
 }
