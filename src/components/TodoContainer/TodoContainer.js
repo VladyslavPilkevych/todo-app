@@ -36,6 +36,7 @@ function TodoContainer() {
       <p className={styles.todoTitle}>Todo</p>
       <div className={styles.textFieldAndBtnCreate}>
         <TextField
+          autoFocus
           id="filled-basic"
           sx={{
             width: 7 / 10,

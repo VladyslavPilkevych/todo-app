@@ -1,4 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, {
+  useState,
+  useEffect,
+  // useRef,
+} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -32,6 +36,7 @@ function ModalEditTask() {
   } = useSelector((state) => state.modal);
   const dispatch = useDispatch();
   const [inputValue, setInputValue] = useState('');
+  // const inputRefActive = useRef();
   const typingNewTask = (event) => {
     setInputValue(event.target.value);
   };
@@ -58,6 +63,18 @@ function ModalEditTask() {
   useEffect(() => {
     setInputValue(content);
   }, [taskInfo]);
+  // useEffect(() => {
+  //   if (isOpen) {
+  //     inputRefActive.current.focus();
+  //   }
+  // }, [inputRefActive]);
+  const focusEditInputField = (input) => {
+    if (input) {
+      setTimeout(() => {
+        input.focus();
+      }, 100);
+    }
+  };
   return (
     <div>
       <Modal
@@ -72,8 +89,11 @@ function ModalEditTask() {
             sx={{
               width: 7 / 10,
             }}
-            autoFocus
-            // inputProps={{ autoFocus: true }}
+            // inputRef={inputRefActive}
+            // type="text"
+            // autoFocus
+            inputRef={focusEditInputField}
+            inputProps={{ autoFocus: true }}
             label="Edit task"
             // variant="filled"
             // value={inputValue}
