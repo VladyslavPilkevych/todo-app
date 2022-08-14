@@ -1,0 +1,2 @@
+export const TOGGLE_MODAL_OPEN = 'TOGGLE_MODAL_OPEN';
+export const GET_TASK_INFO = 'GET_TASK_INFO';

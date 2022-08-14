@@ -1,14 +1,15 @@
-@import "../../assets/styles/global.module.scss";
-@import '../../assets/styles/mixins';
+@import "../../assets/styles/global.module";
+@import "../../assets/styles/mixins";
 
 .todoTask {
-    width: 100%;
+  width: 100%;
 }
 
 .taskText {
-    @include fonts('Poppins', 20px, black, 400);
+  @include fonts("Poppins", 20px, black, 400);
 }
+
 .taskTextChecked {
-    text-decoration: line-through;
-    color: grey;
+  text-decoration: line-through;
+  color: grey;
 }

@@ -1,5 +1,5 @@
-@import "../../assets/styles/global.module.scss";
-@import '../../assets/styles/mixins';
+@import "../../assets/styles/global.module";
+@import "../../assets/styles/mixins";
 
 .background {
   // margin: 5% auto;
@@ -10,19 +10,24 @@
   border-radius: 25px;
   padding: 20px;
 }
+
 .todoTitle {
-  @include fonts('Poppins', 35px, #1363DF, 700);
+  @include fonts("Poppins", 35px, #1363DF, 700);
 }
+
 .textFieldAndBtnCreate {
   margin-top: 20px;
   display: flex;
   justify-items: center;
   align-items: center;
 }
+
 .btnCreateNewTask {
   margin-left: 20px;
 }
+
 .noTasks {
-  @include fonts('Poppins', 20px, black, 400);
+  @include fonts("Poppins", 20px, black, 400);
+
   margin: 20px 0 0 29%;
 }

@@ -4,6 +4,7 @@ import Button from '@mui/material/Button';
 import List from '@mui/material/List';
 import { useLiveQuery } from 'dexie-react-hooks';
 import db from '../../db/db';
+import ModalEditTask from '../ModalEditTask/ModalEditTask';
 import TodoTask from '../TodoTask/TodoTask';
 
 import styles from './TodoContainer.module.scss';
@@ -31,6 +32,7 @@ function TodoContainer() {
   };
   return (
     <div className={styles.background}>
+      <ModalEditTask />
       <p className={styles.todoTitle}>Todo</p>
       <div className={styles.textFieldAndBtnCreate}>
         <TextField
