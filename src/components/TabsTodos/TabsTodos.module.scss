@@ -1,0 +1,8 @@
+@import '../../assets/styles/global.module';
+@import '../../assets/styles/mixins';
+
+.noTasks {
+  @include fonts('Poppins', 20px, black, 400);
+
+  margin: 20px 0 0 29%;
+}

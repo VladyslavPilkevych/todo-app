@@ -1,29 +1,53 @@
 import React, { memo, useState } from 'react';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import List from '@mui/material/List';
+// import List from '@mui/material/List';
 import { useLiveQuery } from 'dexie-react-hooks';
-import db from '../../db/db';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
 import ModalEditTask from '../ModalEditTask/ModalEditTask';
-import TodoTask from '../TodoTask/TodoTask';
+import db from '../../db/db';
+// import TodoTask from '../TodoTask/TodoTask';
+import VerticalTabs from '../TabsTodos/TabsTodos';
 
 import styles from './TodoContainer.module.scss';
 
 function TodoContainer() {
-  const { todos } = db;
-  const allTodos = useLiveQuery(() => todos.toArray(), []);
+  const { todos, categories } = db;
+  // const allTodos = useLiveQuery(() => todos.toArray(), []);
+  const allCategories = useLiveQuery(() => categories.toArray(), []);
 
+  const updateCounter = () => {
+    allCategories?.forEach(async (elem, index) => {
+      await categories.update(elem.id, { counter: index + 1 });
+    });
+  };
+  updateCounter();
+  // const newCateg = async () => {
+  //   await categories.add({
+  //     categorieName: 'Morning',
+  //   });
+  // };
+  // console.log(allCategories);
   const [inputValue, setInputValue] = useState('');
   const typingNewTask = (event) => {
     setInputValue(event.target.value);
+  };
+  const [categorie, setCategorie] = React.useState('');
+  const changeCategorie = (event) => {
+    setCategorie(event.target.value);
   };
   const createNewTaskFn = async (event) => {
     event.preventDefault();
     await todos.add({
       task: inputValue,
       complete: false,
+      categorie,
     });
     setInputValue('');
+    // newCateg();
   };
   const handleKeypress = (e) => {
     if (e.code === 'Enter' && inputValue.length !== 0) {
@@ -47,6 +71,31 @@ function TodoContainer() {
           onChange={typingNewTask}
           onKeyPress={handleKeypress}
         />
+        <FormControl variant="filled" sx={{ m: 1, minWidth: 120 }}>
+          <InputLabel id="demo-simple-select-filled-label">
+            Categorie
+          </InputLabel>
+          <Select
+            labelId="demo-simple-select-filled-label"
+            id="demo-simple-select-filled"
+            value={categorie}
+            onChange={changeCategorie}
+          >
+            <MenuItem value="">
+              <em>None</em>
+            </MenuItem>
+            {allCategories &&
+              allCategories.length > 0 &&
+              allCategories?.map((elem) => (
+                <MenuItem key={elem.categorieName} value={elem.categorieName}>
+                  {elem.categorieName}
+                </MenuItem>
+              ))}
+            {/* <MenuItem value="morning">Morning</MenuItem>
+            <MenuItem value="home">Home</MenuItem>
+            <MenuItem value="garden">Garden</MenuItem> */}
+          </Select>
+        </FormControl>
         <div className={styles.btnCreateNewTask}>
           {inputValue.length ? (
             <Button variant="contained" onClick={createNewTaskFn}>
@@ -59,16 +108,19 @@ function TodoContainer() {
           )}
         </div>
       </div>
-      {allTodos && allTodos.length === 0 && (
+      {/* {allTodos && allTodos.length === 0 && (
         <p className={styles.noTasks}>Any Tasks Yet</p>
-      )}
-      <List sx={{ width: '70%' }}>
+      )} */}
+      {/* <div className={styles.TabsAndList}> */}
+      <VerticalTabs />
+      {/* <List sx={{ width: '70%' }}>
         {allTodos &&
           allTodos?.map((value) => {
             const labelId = `checkbox-list-label-${value.id}`;
             return <TodoTask key={value.id} value={value} labelId={labelId} />;
           })}
-      </List>
+      </List> */}
+      {/* </div> */}
     </div>
   );
 }

@@ -1,10 +1,11 @@
-@import "../../assets/styles/global.module";
-@import "../../assets/styles/mixins";
+@import '../../assets/styles/global.module';
+@import '../../assets/styles/mixins';
 
 .background {
   // margin: 5% auto;
   margin: 0 auto;
-  max-width: 70%;
+  // max-width: 70%;
+  max-width: 85%;
   min-height: 250px;
   background: white;
   border-radius: 25px;
@@ -12,11 +13,12 @@
 }
 
 .todoTitle {
-  @include fonts("Poppins", 35px, #1363DF, 700);
+  @include fonts('Poppins', 35px, #1363df, 700);
 }
 
 .textFieldAndBtnCreate {
   margin-top: 20px;
+  // margin-left: 15%;
   display: flex;
   justify-items: center;
   align-items: center;
@@ -27,7 +29,12 @@
 }
 
 .noTasks {
-  @include fonts("Poppins", 20px, black, 400);
+  @include fonts('Poppins', 20px, black, 400);
 
   margin: 20px 0 0 29%;
 }
+
+// .TabsAndList {
+//   margin-top: 15px;
+//   display: flex;
+// }

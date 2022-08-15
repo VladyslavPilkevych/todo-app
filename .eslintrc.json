@@ -28,6 +28,7 @@
         "react/react-in-jsx-scope": "off",
         "react/jsx-wrap-multilines": "off",
         "linebreak-style": "off",
-        "operator-linebreak": "off"
+        "operator-linebreak": "off",
+        "react/jsx-curly-brace-presence": "off"
     }
 }
