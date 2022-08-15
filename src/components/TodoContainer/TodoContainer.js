@@ -3,10 +3,11 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 // import List from '@mui/material/List';
 import { useLiveQuery } from 'dexie-react-hooks';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
+// import InputLabel from '@mui/material/InputLabel';
+// import MenuItem from '@mui/material/MenuItem';
+// import FormControl from '@mui/material/FormControl';
+// import Select from '@mui/material/Select';
+import Autocomplete from '@mui/material/Autocomplete';
 import ModalEditTask from '../ModalEditTask/ModalEditTask';
 import db from '../../db/db';
 // import TodoTask from '../TodoTask/TodoTask';
@@ -18,7 +19,7 @@ function TodoContainer() {
   const { todos, categories } = db;
   // const allTodos = useLiveQuery(() => todos.toArray(), []);
   const allCategories = useLiveQuery(() => categories.toArray(), []);
-
+  const [newOptionValue, setNewOptionValue] = React.useState('');
   const updateCounter = () => {
     allCategories?.forEach(async (elem, index) => {
       await categories.update(elem.id, { counter: index + 1 });
@@ -36,9 +37,14 @@ function TodoContainer() {
     setInputValue(event.target.value);
   };
   const [categorie, setCategorie] = React.useState('');
-  const changeCategorie = (event) => {
-    setCategorie(event.target.value);
+  const changeCategorie = (event, newValue) => {
+    // setCategorie(event.target.value);
+    setCategorie(newValue);
+    setNewOptionValue(newValue);
   };
+  // const createNewCategorie = () => {
+
+  // }
   const createNewTaskFn = async (event) => {
     event.preventDefault();
     await todos.add({
@@ -47,6 +53,12 @@ function TodoContainer() {
       categorie,
     });
     setInputValue('');
+    const optionArr = allCategories?.map((item) => item.categorieName);
+    if (!optionArr.includes(newOptionValue)) {
+      await categories.add({
+        categorieName: newOptionValue,
+      });
+    }
     // newCateg();
   };
   const handleKeypress = (e) => {
@@ -71,7 +83,18 @@ function TodoContainer() {
           onChange={typingNewTask}
           onKeyPress={handleKeypress}
         />
-        <FormControl variant="filled" sx={{ m: 1, minWidth: 120 }}>
+        <Autocomplete
+          options={allCategories}
+          noOptionsText="Create New Option"
+          getOptionLabel={(option) => option.title}
+          onInputChange={(e, newValue) => {
+            changeCategorie(e, newValue);
+          }}
+          renderInput={(params) => (
+            <TextField {...params} label="Select" variant="outlined" />
+          )}
+        />
+        {/* <FormControl variant="filled" sx={{ m: 1, minWidth: 120 }}>
           <InputLabel id="demo-simple-select-filled-label">
             Categorie
           </InputLabel>
@@ -91,11 +114,11 @@ function TodoContainer() {
                   {elem.categorieName}
                 </MenuItem>
               ))}
-            {/* <MenuItem value="morning">Morning</MenuItem>
+            <MenuItem value="morning">Morning</MenuItem>
             <MenuItem value="home">Home</MenuItem>
-            <MenuItem value="garden">Garden</MenuItem> */}
+            <MenuItem value="garden">Garden</MenuItem>
           </Select>
-        </FormControl>
+        </FormControl> */}
         <div className={styles.btnCreateNewTask}>
           {inputValue.length ? (
             <Button variant="contained" onClick={createNewTaskFn}>
