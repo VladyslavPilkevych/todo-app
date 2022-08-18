@@ -52,7 +52,12 @@ export default function VerticalTabs() {
   const allTodos = useLiveQuery(() => todos.toArray(), []);
   const allCategories = useLiveQuery(() => categories.toArray(), []);
   const [value, setValue] = React.useState(0);
-
+  const updateCounter = () => {
+    allCategories?.forEach(async (elem, index) => {
+      await categories.update(elem.id, { counter: index + 1 });
+    });
+  };
+  updateCounter();
   const handleChange = (e, newValue) => {
     setValue(newValue);
   };
@@ -91,19 +96,13 @@ export default function VerticalTabs() {
         <Tab label="Item Five" index={a11yProps(4)} /> */}
         {allCategories &&
           allCategories.length > 0 &&
-          allCategories?.map((elem) => {
-            console.log(elem.id);
-            return (
-              <Tab
-                key={elem.categorieName}
-                label={elem.categorieName}
-                index={a11yProps(elem.counter)}
-              />
-            );
-          })}
-        {/* <Tab label="Item Six" index={a11yProps(5)} />
-        <Tab label="Item Seven" index={a11yProps(6)} />
-        <Tab label="123" index={a11yProps(7)} /> */}
+          allCategories?.map((elem) => (
+            <Tab
+              key={elem.categorieName}
+              label={elem.categorieName}
+              index={a11yProps(elem.counter)}
+            />
+          ))}
       </Tabs>
       {allTodos && allTodos.length === 0 ? (
         <p className={styles.noTasks}>Any Tasks Yet</p>
@@ -126,42 +125,22 @@ export default function VerticalTabs() {
           </TabPanel>
           {allCategories &&
             allTodos &&
-            allCategories?.map((elem) => {
-              console.log(elem.id);
-              return (
-                <TabPanel key={elem.id} value={value} index={elem.counter}>
-                  {allTodos?.map((item) => {
-                    // console.log(elem.id);
-                    // console.log(item.categorie);
-                    // console.log(elem.categorieName);
-                    if (item.categorie === elem.categorieName) {
-                      console.log(true);
-                      const labelId = `checkbox-list-label-${item.id}`;
-                      return (
-                        <TodoTask
-                          key={item.id}
-                          value={item}
-                          labelId={labelId}
-                        />
-                      );
-                    }
-                    return null;
-                  })}
-                </TabPanel>
-              );
-            })}
-          {/* <TabPanel value={value} index={8}>
-            Item 8
-          </TabPanel>
-          <TabPanel value={value} index={5}>
-            Item Six
-          </TabPanel>
-          <TabPanel value={value} index={6}>
-            Item Seven
-          </TabPanel>
-          <TabPanel value={value} index={7}>
-            5412
-          </TabPanel> */}
+            allCategories?.map((elem) => (
+              <TabPanel key={elem.id} value={value} index={elem.counter}>
+                {allTodos?.map((item) => {
+                  // console.log(elem.id);
+                  // console.log(item.categorie);
+                  // console.log(elem.categorieName);
+                  if (item.categorie === elem.categorieName) {
+                    const labelId = `checkbox-list-label-${item.id}`;
+                    return (
+                      <TodoTask key={item.id} value={item} labelId={labelId} />
+                    );
+                  }
+                  return null;
+                })}
+              </TabPanel>
+            ))}
         </>
       )}
     </Box>
