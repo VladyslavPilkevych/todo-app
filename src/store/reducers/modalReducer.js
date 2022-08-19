@@ -5,6 +5,7 @@ const initialValues = {
   taskInfo: {
     id: null,
     content: null,
+    categorie: null,
   },
 };
 

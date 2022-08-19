@@ -10,6 +10,7 @@ import Modal from '@mui/material/Modal';
 import TextField from '@mui/material/TextField';
 import { toggleModalOpen } from '../../store/actionCreators/modalAC';
 import db from '../../db/db';
+import SelectTodoCategorie from '../SelectTodoCategorie/SelectTodoCategorie';
 
 const style = {
   position: 'absolute',
@@ -68,13 +69,13 @@ function ModalEditTask() {
   //     inputRefActive.current.focus();
   //   }
   // }, [inputRefActive]);
-  const focusEditInputField = (input) => {
-    if (input) {
-      setTimeout(() => {
-        input.focus();
-      }, 100);
-    }
-  };
+  // const focusEditInputField = (input) => {
+  //   if (input) {
+  //     setTimeout(() => {
+  //       input.focus();
+  //     }, 100);
+  //   }
+  // };
   return (
     <div>
       <Modal
@@ -87,12 +88,12 @@ function ModalEditTask() {
           <TextField
             id="filled-basic"
             sx={{
-              width: 7 / 10,
+              width: 6 / 10,
             }}
             // inputRef={inputRefActive}
             // type="text"
             // autoFocus
-            inputRef={focusEditInputField}
+            // inputRef={focusEditInputField}
             inputProps={{ autoFocus: true }}
             label="Edit task"
             // variant="filled"
@@ -101,8 +102,11 @@ function ModalEditTask() {
             onChange={typingNewTask}
             onKeyPress={handleKeypress}
           />
+          <div style={{ width: '40%', marginRight: '20px' }}>
+            <SelectTodoCategorie modeEdit={taskInfo} />
+          </div>
           <Button variant="contained" onClick={saveAndClose}>
-            Save text
+            Save changes
           </Button>
         </Box>
       </Modal>

@@ -97,7 +97,9 @@ function TodoContainer() {
           onChange={typingNewTask}
           onKeyPress={handleKeypress}
         />
-        <SelectTodoCategorie />
+        <div style={{ width: '20%' }}>
+          <SelectTodoCategorie />
+        </div>
         {/* {allCategories && (
           <Autocomplete
             options={allCategories}

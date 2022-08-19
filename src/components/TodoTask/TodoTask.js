@@ -27,9 +27,9 @@ function TodoTask(props) {
     await todos.update(id, { complete: !checked });
     setChecked((e) => !e);
   };
-  const editTask = async (itemId, itemTask) => {
+  const editTask = async (itemId, itemTask, itemCategorie) => {
     dispatch(toggleModalOpen(true));
-    dispatch(getTaskInfo({ itemId, itemTask }));
+    dispatch(getTaskInfo({ itemId, itemTask, itemCategorie }));
   };
   const deleteTask = async (id) => {
     todos.delete(id);
@@ -45,7 +45,7 @@ function TodoTask(props) {
             <IconButton
               edge="end"
               aria-label="comments"
-              onClick={() => editTask(value.id, value.task)}
+              onClick={() => editTask(value.id, value.task, value.categorie)}
             >
               <EditIcon />
             </IconButton>
@@ -99,6 +99,7 @@ TodoTask.propTypes = {
     id: PropTypes.number.isRequired,
     task: PropTypes.string,
     complete: PropTypes.bool,
+    categorie: PropTypes.string,
   }),
 };
 
