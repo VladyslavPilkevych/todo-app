@@ -8,6 +8,7 @@ import PropTypes from 'prop-types';
 import { useLiveQuery } from 'dexie-react-hooks';
 import db from '../../db/db';
 import TodoTask from '../TodoTask/TodoTask';
+import DeleteTasksCategories from '../DeleteTasksCategories/DeleteTasksCategories';
 import styles from './TabsTodos.module.scss';
 
 function TabPanel(props) {
@@ -30,15 +31,16 @@ function TabPanel(props) {
 }
 
 TabPanel.propTypes = {
-  index: PropTypes.number.isRequired,
+  index: PropTypes.number,
+  // index: PropTypes.number.isRequired,
   // eslint-disable-next-line
   children: PropTypes.any.isRequired,
   // eslint-disable-next-line
   value: PropTypes.any.isRequired,
 };
-// TabPanel.defaultProps = {
-//   value: 0,
-// };
+TabPanel.defaultProps = {
+  index: 1000,
+};
 
 function a11yProps(index) {
   return {
@@ -75,35 +77,38 @@ export default function VerticalTabs() {
         width: 1,
       }}
     >
-      <Tabs
-        orientation="vertical"
-        // variant="scrollable"
-        value={value}
-        onChange={handleChange}
-        aria-label="Vertical tabs example"
-        sx={{
-          borderRight: 1,
-          borderColor: 'divider',
-          // minWidth: 0.2,
-          // maxWidth: 0.4,
-          // width: 0.15,
-        }}
-      >
-        <Tab label="All" index={a11yProps(0)} />
-        {/* <Tab label="Item Two" index={a11yProps(1)} />
+      <div>
+        <Tabs
+          orientation="vertical"
+          // variant="scrollable"
+          value={value}
+          onChange={handleChange}
+          aria-label="Vertical tabs example"
+          sx={{
+            borderRight: 1,
+            borderColor: 'divider',
+            // minWidth: 0.2,
+            // maxWidth: 0.4,
+            // width: 0.15,
+          }}
+        >
+          <Tab label="All" index={a11yProps(0)} />
+          {/* <Tab label="Item Two" index={a11yProps(1)} />
         <Tab label="Item Three" index={a11yProps(2)} />
         <Tab label="Item Four" index={a11yProps(3)} />
         <Tab label="Item Five" index={a11yProps(4)} /> */}
-        {allCategories &&
-          allCategories.length > 0 &&
-          allCategories?.map((elem) => (
-            <Tab
-              key={elem.categorieName}
-              label={elem.categorieName}
-              index={a11yProps(elem.counter)}
-            />
-          ))}
-      </Tabs>
+          {allCategories &&
+            allCategories.length > 0 &&
+            allCategories?.map((elem) => (
+              <Tab
+                key={elem.categorieName}
+                label={elem.categorieName}
+                index={a11yProps(elem.counter)}
+              />
+            ))}
+        </Tabs>
+        <DeleteTasksCategories />
+      </div>
       {allTodos && allTodos.length === 0 ? (
         <p className={styles.noTasks}>Any Tasks Yet</p>
       ) : (

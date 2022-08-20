@@ -40,13 +40,14 @@ function SelectTodoCategorie(props) {
     if (e.key === 'Enter' && !newArr.includes(selectValueCategorie)) {
       await categories.add({
         categorieName: selectValueCategorie,
-        counter: allCategories[allCategories.length - 1].counter + 1,
+        // counter: allCategories[allCategories.length - 1].counter + 1,
       });
     }
   };
   if (!allCategories) {
     return null;
   }
+  console.log(selectValueCategorie);
   return (
     <Autocomplete
       options={allCategories}
