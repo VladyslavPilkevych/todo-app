@@ -92,7 +92,8 @@ function TodoContainer() {
             width: 6 / 10,
           }}
           label="New Task"
-          variant="filled"
+          // variant="filled"
+          variant="outlined"
           value={inputValue}
           onChange={typingNewTask}
           onKeyPress={handleKeypress}
