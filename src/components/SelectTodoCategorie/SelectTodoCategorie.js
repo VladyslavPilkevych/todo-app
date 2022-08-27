@@ -15,7 +15,9 @@ function SelectTodoCategorie(props) {
   const [selectValueCategorie, setSelectValueCategorie] = useState('');
   const { todoValues } = useSelector((state) => state.todos);
   const updateTaskCategorie = async (id, todoCategorieValue) => {
-    await todos.update(id, { categorie: todoCategorieValue });
+    // await todos.update(id, { categorie: todoCategorieValue });
+    console.log('updateTaskCategorie');
+    console.log(id, todoCategorieValue, todos);
   };
   useEffect(() => {
     if (todoValues.categorie && todoValues.categorie.length > 0) {
@@ -47,7 +49,6 @@ function SelectTodoCategorie(props) {
   if (!allCategories) {
     return null;
   }
-  console.log(selectValueCategorie);
   return (
     <Autocomplete
       options={allCategories}

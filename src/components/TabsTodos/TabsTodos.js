@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState, useEffect } from 'react';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
@@ -53,16 +53,26 @@ export default function VerticalTabs() {
   const { todos, categories } = db;
   const allTodos = useLiveQuery(() => todos.toArray(), []);
   const allCategories = useLiveQuery(() => categories.toArray(), []);
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = useState(0);
   const updateCounter = () => {
     allCategories?.forEach(async (elem, index) => {
-      await categories.update(elem.id, { counter: index + 1 });
+      if (elem.id) {
+        await categories.update(elem.id, { counter: index + 1 });
+      }
     });
   };
   updateCounter();
+  useEffect(() => {
+    if (allCategories && allCategories.length < value) {
+      setValue(0);
+    }
+  }, [allCategories]);
   const handleChange = (e, newValue) => {
     setValue(newValue);
   };
+  // if (allCategories) {
+  //   console.log(allCategories.length);
+  // }
 
   return (
     <Box
@@ -93,10 +103,6 @@ export default function VerticalTabs() {
           }}
         >
           <Tab label="All" index={a11yProps(0)} />
-          {/* <Tab label="Item Two" index={a11yProps(1)} />
-        <Tab label="Item Three" index={a11yProps(2)} />
-        <Tab label="Item Four" index={a11yProps(3)} />
-        <Tab label="Item Five" index={a11yProps(4)} /> */}
           {allCategories &&
             allCategories.length > 0 &&
             allCategories?.map((elem) => (

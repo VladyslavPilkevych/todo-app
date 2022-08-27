@@ -19,7 +19,9 @@ function DeleteTasksCategories() {
   const deleteCategorie = async (id) => {
     console.log('categories.delete(id);');
     // console.log(id);
-    categories.delete(id);
+    if (id) {
+      categories.delete(id);
+    }
   };
   const handleClose = () => {
     setAnchorEl(null);

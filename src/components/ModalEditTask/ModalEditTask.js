@@ -35,6 +35,9 @@ function ModalEditTask() {
     taskInfo,
     taskInfo: { itemId, itemTask: content },
   } = useSelector((state) => state.modal);
+  const {
+    todoValues: { categorie },
+  } = useSelector((state) => state.todos);
   const dispatch = useDispatch();
   const [inputValue, setInputValue] = useState('');
   // const inputRefActive = useRef();
@@ -49,9 +52,17 @@ function ModalEditTask() {
   const updateTaskText = async (id) => {
     await todos.update(id, { task: inputValue });
   };
+  const updateTaskCategorie = async (id) => {
+    if (categorie) {
+      await todos.update(id, { categorie });
+    }
+  };
   const saveAndClose = () => {
     handleClose();
-    updateTaskText(itemId);
+    if (itemId) {
+      updateTaskText(itemId);
+      updateTaskCategorie(itemId);
+    }
   };
   const handleKeypress = (e) => {
     if (e.code === 'Enter' && inputValue.length !== 0) {

@@ -40,7 +40,9 @@ function TodoContainer() {
 
   const updateCounter = () => {
     allCategories?.forEach(async (elem, index) => {
-      await categories.update(elem.id, { counter: index + 1 });
+      if (elem.id) {
+        await categories.update(elem.id, { counter: index + 1 });
+      }
     });
   };
   updateCounter();
@@ -53,14 +55,20 @@ function TodoContainer() {
   const typingNewTask = (event) => {
     setInputValue(event.target.value);
   };
+  // const updateTaskCategorie = async (id) => {
+  //   if (categorie) {
+  //     await todos.update(id, { categorie });
+  //   }
+  // };
   const createNewTaskFn = async (event) => {
     event.preventDefault();
-    console.log(selectValueCategorie);
-    await todos.add({
-      task: inputValue,
-      complete: false,
-      categorie: selectValueCategorie,
-    });
+    if (inputValue && selectValueCategorie) {
+      await todos.add({
+        task: inputValue,
+        complete: false,
+        categorie: selectValueCategorie,
+      });
+    }
     setInputValue('');
     setSelectValueCategorie('');
     dispatch(clearTodosValuesRedux());

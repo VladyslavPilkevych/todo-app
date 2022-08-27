@@ -24,7 +24,9 @@ function TodoTask(props) {
   const { todos } = db;
   const [checked, setChecked] = useState(value.complete);
   const updateTaskComplete = async (id) => {
-    await todos.update(id, { complete: !checked });
+    if (id) {
+      await todos.update(id, { complete: !checked });
+    }
     setChecked((e) => !e);
   };
   const editTask = async (itemId, itemTask, itemCategorie) => {
