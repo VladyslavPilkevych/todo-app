@@ -1,17 +1,16 @@
-@import '../../assets/styles/global.module';
-@import '../../assets/styles/mixins';
+@import "../../assets/styles/global.module";
 
 .background {
   margin: 0 auto;
   max-width: 85%;
   min-height: 250px;
-  background: white;
+  background: $white;
   border-radius: 25px;
   padding: 20px;
 }
 
 .todoTitle {
-  @include fonts('Poppins', 35px, #1363df, 700);
+  @include fonts("Poppins", 35px, $blue, 700);
 }
 
 .textFieldAndBtnCreate {
@@ -26,7 +25,7 @@
 }
 
 .noTasks {
-  @include fonts('Poppins', 20px, black, 400);
+  @include fonts("Poppins", 20px, $black, 400);
 
   margin: 20px 0 0 29%;
 }

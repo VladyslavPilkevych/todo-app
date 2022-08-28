@@ -1,7 +1,7 @@
 // @import 'scss-reset/_reset.scss';
 @import "./fonts.module";
-@import "./_variables";
-@import "./_mixins";
+@import "./export";
+@import "./mixins";
 
 body {
   color: $black;
