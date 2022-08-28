@@ -17,7 +17,6 @@ const todosReducer = (state = initialValues, { type, payload } = {}) => {
     case CHANGE_TODOS_VALUES:
       return { ...state, todoValues: payload };
     case CHANGE_TODOS_CATEGORIE:
-      // return { ...state.todoValues, categorie: payload };
       return {
         ...state,
         todoValues: { ...state.todoValues, categorie: payload },

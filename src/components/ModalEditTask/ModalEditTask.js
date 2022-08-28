@@ -1,16 +1,14 @@
-import React, {
-  useState,
-  useEffect,
-  // useRef,
-} from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React, { memo, useState, useEffect } from 'react';
+
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
 import TextField from '@mui/material/TextField';
+
+import { useSelector, useDispatch } from 'react-redux';
+import SelectTodoCategorie from '../SelectTodoCategorie/SelectTodoCategorie';
 import { toggleModalOpen } from '../../store/actionCreators/modalAC';
 import db from '../../db/db';
-import SelectTodoCategorie from '../SelectTodoCategorie/SelectTodoCategorie';
 
 const style = {
   position: 'absolute',
@@ -19,8 +17,6 @@ const style = {
   transform: 'translate(-50%, -50%)',
   width: 600,
   bgcolor: 'background.paper',
-  // border: '2px solid #000',
-  // boxShadow: 24,
   p: 6,
   display: 'flex',
   justifyItems: 'center',
@@ -40,13 +36,11 @@ function ModalEditTask() {
   } = useSelector((state) => state.todos);
   const dispatch = useDispatch();
   const [inputValue, setInputValue] = useState('');
-  // const inputRefActive = useRef();
   const typingNewTask = (event) => {
     setInputValue(event.target.value);
   };
   const [open, setOpen] = useState(false);
   const handleClose = () => {
-    // setOpen(false);
     dispatch(toggleModalOpen(false));
   };
   const updateTaskText = async (id) => {
@@ -75,18 +69,6 @@ function ModalEditTask() {
   useEffect(() => {
     setInputValue(content);
   }, [taskInfo]);
-  // useEffect(() => {
-  //   if (isOpen) {
-  //     inputRefActive.current.focus();
-  //   }
-  // }, [inputRefActive]);
-  // const focusEditInputField = (input) => {
-  //   if (input) {
-  //     setTimeout(() => {
-  //       input.focus();
-  //     }, 100);
-  //   }
-  // };
   return (
     <div>
       <Modal
@@ -101,14 +83,8 @@ function ModalEditTask() {
             sx={{
               width: 6 / 10,
             }}
-            // inputRef={inputRefActive}
-            // type="text"
-            // autoFocus
-            // inputRef={focusEditInputField}
             inputProps={{ autoFocus: true }}
             label="Edit task"
-            // variant="filled"
-            // value={inputValue}
             defaultValue={inputValue}
             onChange={typingNewTask}
             onKeyPress={handleKeypress}
@@ -125,4 +101,4 @@ function ModalEditTask() {
   );
 }
 
-export default ModalEditTask;
+export default memo(ModalEditTask);

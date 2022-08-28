@@ -14,7 +14,6 @@ const modalReducer = (state = initialValues, { type, payload } = {}) => {
     case TOGGLE_MODAL_OPEN:
       return { ...state, isOpen: payload };
     case GET_TASK_INFO:
-      // console.log(payload);
       return { ...state, taskInfo: payload };
     default:
       return state;

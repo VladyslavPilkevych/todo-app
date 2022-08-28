@@ -1,14 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { memo, useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
+
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import List from '@mui/material/List';
-import PropTypes from 'prop-types';
+
 import { useLiveQuery } from 'dexie-react-hooks';
-import db from '../../db/db';
 import TodoTask from '../TodoTask/TodoTask';
 import DeleteTasksCategories from '../DeleteTasksCategories/DeleteTasksCategories';
+import db from '../../db/db';
 import styles from './TabsTodos.module.scss';
 
 function TabPanel(props) {
@@ -32,10 +34,7 @@ function TabPanel(props) {
 
 TabPanel.propTypes = {
   index: PropTypes.number,
-  // index: PropTypes.number.isRequired,
-  // eslint-disable-next-line
   children: PropTypes.any.isRequired,
-  // eslint-disable-next-line
   value: PropTypes.any.isRequired,
 };
 TabPanel.defaultProps = {
@@ -49,7 +48,7 @@ function a11yProps(index) {
   };
 }
 
-export default function VerticalTabs() {
+function VerticalTabs() {
   const { todos, categories } = db;
   const allTodos = useLiveQuery(() => todos.toArray(), []);
   const allCategories = useLiveQuery(() => categories.toArray(), []);
@@ -70,18 +69,12 @@ export default function VerticalTabs() {
   const handleChange = (e, newValue) => {
     setValue(newValue);
   };
-  // if (allCategories) {
-  //   console.log(allCategories.length);
-  // }
-
   return (
     <Box
       sx={{
         flexGrow: 1,
         bgcolor: 'background.paper',
-        // display: 'flex',
         display: 'grid',
-        // grid-template-columns: 200px 200px 200px;
         gridTemplateColumns: '15% 85%',
         marginTop: 3,
         width: 1,
@@ -90,16 +83,12 @@ export default function VerticalTabs() {
       <div>
         <Tabs
           orientation="vertical"
-          // variant="scrollable"
           value={value}
           onChange={handleChange}
           aria-label="Vertical tabs example"
           sx={{
             borderRight: 1,
             borderColor: 'divider',
-            // minWidth: 0.2,
-            // maxWidth: 0.4,
-            // width: 0.15,
           }}
         >
           <Tab label="All" index={a11yProps(0)} />
@@ -139,9 +128,6 @@ export default function VerticalTabs() {
             allCategories?.map((elem) => (
               <TabPanel key={elem.id} value={value} index={elem.counter}>
                 {allTodos?.map((item) => {
-                  // console.log(elem.id);
-                  // console.log(item.categorie);
-                  // console.log(elem.categorieName);
                   if (item.categorie === elem.categorieName) {
                     const labelId = `checkbox-list-label-${item.id}`;
                     return (
@@ -157,3 +143,5 @@ export default function VerticalTabs() {
     </Box>
   );
 }
+
+export default memo(VerticalTabs);
