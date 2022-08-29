@@ -2,6 +2,8 @@
 <hr>
 <a href='https://todo-app-website-pet-project.herokuapp.com/'>https://todo-app-website-pet-project.herokuapp.com//</a>
 <hr>
+<img src='./src/assets/images/preview-img.png' />
+<hr>
 <h2>Technologies stack:</h2>
 <ol>
     <li>
