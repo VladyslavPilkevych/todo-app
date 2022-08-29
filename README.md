@@ -38,3 +38,4 @@
         </ul>
     </li>
 </ol>
+<p font-style="oblique">Phone version and wide monitors are not supported!</p>
